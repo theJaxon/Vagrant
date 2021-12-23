@@ -1,0 +1,27 @@
+---
+- name: Gather package facts
+  package_facts:
+    manager: auto
+
+- name: Install gpg-agent package If not present
+  apt:
+    name: gpg-agent
+    update_cache: true
+    state: present 
+  when: "'gpg-agent' not in ansible_facts['packages']"
+
+- name: Add HashiCorp Key 
+  apt_key:
+    url: https://apt.releases.hashicorp.com/gpg
+    state: present
+
+- name: Get Distribution codename 
+  set_fact:
+    codename: "{{ ansible_facts['lsb']['codename'] }}"
+
+- name: Add HashiCorp Repository 
+  apt_repository:
+    filename: consul
+    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ codename }} main"
+    update_cache: true
+    state: present

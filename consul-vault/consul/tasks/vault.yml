@@ -1,0 +1,15 @@
+- name: Install vault 
+  package:
+    name: vault 
+    state: present 
+
+- name: Copy vault config file 
+  copy:
+    src: vault.hcl
+    dest: /etc/vault.d/vault.hcl
+
+- name: Enable and start vault server 
+  service:
+    name: vault 
+    state: started
+    enabled: true

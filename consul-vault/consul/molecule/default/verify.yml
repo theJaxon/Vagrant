@@ -1,0 +1,12 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: true
+  tasks:
+  - set_fact: 
+      server_hostname: "{{ ansible_facts['hostname'] }}"
+
+  - name: Health check for Consul Server 
+    uri:
+      url: "http://127.0.0.1:8500/v1/health/node/{{ server_hostname }}"
+      status_code: 200

@@ -1,0 +1,21 @@
+advertise_addr = "{{ ansible_facts['eth1']['ipv4']['address'] }}"
+client_addr = "{{ ansible_facts['eth1']['ipv4']['address'] }}"
+datacenter = "vagrant-dc"
+data_dir = "/opt/consul"
+node_name = "{{ ansible_facts['hostname'] }}"
+
+# Log settings 
+log_file = "/etc/consul/logs/"
+log_level = "DEBUG"
+
+retry_join = ["10.1.42.101", "10.1.42.102", "10.1.42.103"]
+
+{% if is_server == 'true' %}
+
+bootstrap_expect = {{ groups['consul'] | length }}
+
+server = true
+ui_config { enabled = true }
+ports { http = 8500 }
+
+{% endif %}

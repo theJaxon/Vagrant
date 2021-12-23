@@ -1,0 +1,10 @@
+---
+- name: Add HashiCorp repository
+  yum_repository:
+    baseurl: https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/stable
+    description: Hashicorp respository
+    gpgkey: https://rpm.releases.hashicorp.com/gpg
+    gpgcheck: true
+    name: consul
+    file: consul
+    state: present

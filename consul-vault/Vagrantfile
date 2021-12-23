@@ -1,0 +1,52 @@
+CONSUL_SERVER_NAME = "consul-server"
+VAULT_SERVER_NAME = "vault-server"
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "bento/almalinux-8"
+  config.vm.synced_folder ".", "/vagrant", type: "rsync"
+  config.vm.box_check_update = false
+
+  # Spin up 3 Consul Servers
+  (1..3).each do |i|
+    config.vm.define "#{CONSUL_SERVER_NAME}#{i}" do |server|
+      server.vm.hostname = "#{CONSUL_SERVER_NAME}#{i}"
+      server.vm.network "private_network", ip: "10.1.42.#{100 + i}"
+
+      # Allow Consul UI Access Via Host machine
+      server.vm.network "forwarded_port", guest: 8500, host: "850#{i}"
+      
+      server.vm.provider "virtualbox" do |vb|
+        vb.name   = "#{CONSUL_SERVER_NAME}#{i}"
+        vb.cpus   = 1
+        vb.memory = "2048"
+      end
+    end
+  end
+
+  # Spin up 2 Vault Servers
+  (1..2).each do |i|
+    config.vm.define "#{VAULT_SERVER_NAME}#{i}" do |server|
+      server.vm.hostname = "#{VAULT_SERVER_NAME}#{i}"
+      server.vm.network "private_network", ip: "10.1.42.#{200 + i}"
+
+      # Allow Vault UI Access Via Host machine
+      server.vm.network "forwarded_port", guest: 8200, host: "820#{i}"
+
+      server.vm.provider "virtualbox" do |vb|
+        vb.name   = "#{VAULT_SERVER_NAME}#{i}"
+        vb.cpus   = 1
+        vb.memory = "2048"
+      end
+    end
+  end
+
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "entrypoint.yml"  
+    ansible.groups = {
+      "consul" => ["consul-server1", "consul-server2", "consul-server3"],
+      "vault" => ["vault-server1", "vault-server2"],
+      "consul:vars" => {"is_server" => "true"},
+      "vault:vars"  => {"is_server" => "false"}
+    }
+  end  
+end

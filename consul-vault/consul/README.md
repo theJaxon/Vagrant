@@ -1,0 +1,4 @@
+Consul
+=========
+
+Install HashiCorp Consul 

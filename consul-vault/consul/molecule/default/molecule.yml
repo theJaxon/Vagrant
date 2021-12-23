@@ -1,0 +1,28 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: podman
+platforms:
+  - name: centos
+    image: geerlingguy/docker-centos8-ansible
+    pre_build_image: true
+    privileged: true
+    volumes:
+    - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: "/usr/sbin/init"
+  - name: ubuntu  
+    image: geerlingguy/docker-ubuntu2004-ansible
+    pre_build_image: true
+    privileged: true
+    volumes:
+    - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: "/usr/sbin/init"
+provisioner:
+  name: ansible
+verifier:
+  name: ansible
+lint: 
+  set -e 
+  yamllint .
+  ansible-lint .

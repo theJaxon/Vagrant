@@ -1,0 +1,46 @@
+---
+- debug:
+    var: hostvars[inventory_hostname]['ansible_facts']['eth1']['ipv4']['address']
+- name: Include tasks based on the operating system
+  become: True 
+  block:
+  - include_tasks: "install-{{ ansible_facts['os_family'] }}.yml"
+
+- set_fact:
+    host_ip: "{{ hostvars[inventory_hostname]['ansible_facts']['eth1']['ipv4']['address'] }}"
+
+- name: Set Consul address Environment variable in bashrc 
+  lineinfile:
+    path: /home/vagrant/.bashrc
+    line: "export CONSUL_HTTP_ADDR={{ host_ip }}:8500"
+
+- name: Install Consul
+  package:
+    name: consul
+    state: present
+
+- name: Create logs directory 
+  file:
+    state: directory 
+    path: /etc/consul/logs/
+    owner: consul
+    group: consul
+
+- name: Create Consul Config file 
+  template:
+    src: consul.hcl.j2
+    dest: /etc/consul.d/consul.hcl
+    owner: consul
+    group: consul
+  notify: 
+  - Restart Consul
+
+- name: Start and Enable Consul Service 
+  service:
+    name: consul
+    state: started 
+    enabled: true
+
+- name: Install Vault on consul agents in client mode 
+  include_tasks: vault.yml
+  when: is_server == 'false'
