@@ -19,6 +19,8 @@ Running Vault in High Availability mode using Consul as a default Storage Backen
 |  vault-server2 | 10.1.42.202 | 8202 |       Client      |
 
 
+![Consul-Cluster](https://github.com/theJaxon/Vagrant/blob/main/consul-vault/Diagram/consul-cluster.png)
+
 ---
 
 ### What could be enhanced 
