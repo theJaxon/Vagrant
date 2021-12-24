@@ -1,3 +1,8 @@
+- name: Change Vault default address from https to http 
+  lineinfile:
+    line: export VAULT_ADDR='http://127.0.0.1:8200'
+    path: /home/vagrant/.bashrc
+
 - name: Install vault 
   package:
     name: vault 
