@@ -45,7 +45,9 @@ Vagrant.configure("2") do |config|
     ansible.groups = {
       "consul" => ["consul-server1", "consul-server2", "consul-server3"],
       "vault" => ["vault-server1", "vault-server2"],
+      # setting is_server to true indicates that consul agent for hosts in this group will run in server mode
       "consul:vars" => {"is_server" => "true"},
+      # setting is_server to false indicates that consul agent for hosts in this group will run in client mode
       "vault:vars"  => {"is_server" => "false"}
     }
   end  

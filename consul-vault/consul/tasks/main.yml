@@ -1,18 +1,8 @@
 ---
-- debug:
-    var: hostvars[inventory_hostname]['ansible_facts']['eth1']['ipv4']['address']
 - name: Include tasks based on the operating system
   become: True 
   block:
   - include_tasks: "install-{{ ansible_facts['os_family'] }}.yml"
-
-- set_fact:
-    host_ip: "{{ hostvars[inventory_hostname]['ansible_facts']['eth1']['ipv4']['address'] }}"
-
-- name: Set Consul address Environment variable in bashrc 
-  lineinfile:
-    path: /home/vagrant/.bashrc
-    line: "export CONSUL_HTTP_ADDR={{ host_ip }}:8500"
 
 - name: Install Consul
   package:

@@ -1,5 +1,5 @@
 advertise_addr = "{{ ansible_facts['eth1']['ipv4']['address'] }}"
-client_addr = "{{ ansible_facts['eth1']['ipv4']['address'] }}"
+client_addr = "0.0.0.0"
 datacenter = "vagrant-dc"
 data_dir = "/opt/consul"
 node_name = "{{ ansible_facts['hostname'] }}"
