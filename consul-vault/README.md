@@ -12,6 +12,18 @@ Running Vault in High Availability mode using Consul as a default Storage Backen
 - For production use cases the Consul cluster should ideally consist of no less than 5 Nodes 
 - Vault is installed on 2 Nodes running Consul agent in Client mode
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Consul-Vault](#consul-vault)
+    - [How to use the project](#how-to-use-the-project)
+    - [Vagrant Machines Details](#vagrant-machines-details)
+    - [Forwarded Ports](#forwarded-ports)
+    - [What could be enhanced](#what-could-be-enhanced)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ---
 
 ### How to use the project 
@@ -57,6 +69,21 @@ vault-server2   10.1.42.202:8301  alive   client  1.11.1  2         vagrant-dc  
 
 
 ![Consul-Cluster](https://github.com/theJaxon/Vagrant/blob/main/consul-vault/Diagram/consul-cluster.png)
+
+---
+
+### Forwarded Ports
+- The list of ports listed in the table above server the purpose of allowing UI Access for Consul agents in Server mode and for Vault UI
+- Port `8500` from Consul Servers and `8200` from Vault Servers were forwarded 
+- To access the UI any of the following approaches should work
+
+|       UI       |   Via Forwarded Port  |      Via Machine IP     |
+|:--------------:|:---------------------:|:-----------------------:|
+| consul-server1 | http://localhost:8501 | http://10.1.42.101:8500 |
+| consul-server2 | http://localhost:8502 | http://10.1.42.102:8500 |
+| consul-server3 | http://localhost:8503 | http://10.1.42.103:8500 |
+|  vault-server1 | http://localhost:8201 | http://10.1.42.201:8200 |
+|  vault-server2 | http://localhost:8202 | http://10.1.42.202:8200 |
 
 ---
 
