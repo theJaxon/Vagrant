@@ -1,0 +1,39 @@
+- name: Install the latest version of yum-utils
+  ansible.builtin.yum:
+    name: yum-utils
+    state: latest
+
+- name: Add docker-ce repository
+  copy:
+    content: |
+      [docker-ce-stable]
+      name=Docker CE Stable - $basearch
+      baseurl=https://download.docker.com/linux/centos/$releasever/$basearch/stable
+      enabled=1
+      gpgcheck=1
+      gpgkey=https://download.docker.com/linux/centos/gpg
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: Install Docker engine
+  ansible.builtin.yum:
+    name: 
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+
+- name: Start and Enable Docker
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: true
+
+- name: Create Docker Group
+  ansible.builtin.group:
+    name: docker
+    state: present
+
+- name: Add Vagrant user to docker group
+  user:
+    name: vagrant
+    groups: docker
+    append: yes

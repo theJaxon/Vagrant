@@ -1,0 +1,23 @@
+---
+- name: Install Docker
+  include_tasks: docker.yml
+
+- name: Install Localstack Dependencies
+  yum:
+    name: 
+    - python3
+    - python3-pip
+    state: present
+
+- name: Install localstack and awslocal
+  ansible.builtin.pip:
+    name: 
+      - localstack
+      - awscli
+      - awscli-local
+
+- name: awslocal auto-completion
+  lineinfile:
+    path: /home/vagrant/.bashrc
+    line: complete -C '/usr/local/bin/aws_completer' awslocal
+    state: present
