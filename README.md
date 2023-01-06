@@ -8,9 +8,10 @@ Contains Vagrantfiles and the related config files used to setup the machines
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Basic commands](#basic-commands)
-- [Vagrant Boxes](#vagrant-boxes)
-- [Synced Folders](#synced-folders)
+- [Basics](#basics)
+  - [Vagrant Boxes](#vagrant-boxes)
+  - [Synced Folders](#synced-folders)
+  - [Basic commands](#basic-commands)
 - [Networking](#networking)
   - [Private Networking](#private-networking)
   - [Port Forwarding](#port-forwarding)
