@@ -8,6 +8,7 @@ Contains Vagrantfiles and the related config files used to setup the machines
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
+- [Prerequisites](#prerequisites)
 - [Basics](#basics)
   - [Vagrant Boxes](#vagrant-boxes)
   - [Synced Folders](#synced-folders)
@@ -22,6 +23,10 @@ Contains Vagrantfiles and the related config files used to setup the machines
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ---
+
+### Prerequisites
+- Start by downloading [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (This will be used as [our provider](https://developer.hashicorp.com/vagrant/docs/providers))
+- After that Install [Vagrant software](https://developer.hashicorp.com/vagrant/downloads)
 
 ### Basics
 
