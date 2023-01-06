@@ -29,7 +29,7 @@ Contains Vagrantfiles and the related config files used to setup the machines
 - The package format for Vagrant environments where we specify a box environment and OS in the **Vagrantfile**
 - It's better to also specify the exact box version just to [avoid any breaking changes that might happen](https://github.com/theJaxon/Kontainer8/blob/main/Vagrantfile#L5) (Don't use latest)
 
-```Vagrantfile
+```ruby
 config.vm.box = "ubuntu/jammy64"
 config.vm.box_version = "20220718.0.1"
 ```
@@ -38,7 +38,7 @@ config.vm.box_version = "20220718.0.1"
 - Enable Vagrant to sync a folder on the host machine to the guest machine, allowing you to continue working on your project's files on your host machine, but use the resources in the guest machine to compile or run your project.
 - We stick to the default and use **`/vagrant`** as the directory that will be synced
 
-```Vagrantfile
+```ruby
 config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 ```
 
@@ -92,7 +92,7 @@ vagrant destroy -f
 - Vagrant Cloud is what you can consider the equivalent of Dockerhub, just a place to [fetch the needed Vagrant Boxes from](https://app.vagrantup.com/boxes/search)
 - Some [quality Vagrant boxes](https://app.vagrantup.com/bento) are being maintained by the [Bento Project](https://github.com/chef/bento)
 
-```Vagrantfile
+```ruby
 config.vm.network "private_network", ip: "192.168.50.210"
 ```
 
@@ -100,7 +100,7 @@ config.vm.network "private_network", ip: "192.168.50.210"
 - [Allows accessing specific port on the vagrant machine by mapping it to another port on the host OS](https://github.com/theJaxon/Vagrant/blob/main/consul-vault/Vagrantfile#L16)
 - Example - a web server listening on port 80 can have forwarded port mapping to port 8080
 
-```Vagrantfile
+```ruby
 # Nginx let's say
 config.vm.network "forwarded_port", guest: 80, host: 8080
 ```
