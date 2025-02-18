@@ -2,7 +2,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "gyptazy/rocky9.2-arm64"
   config.vm.box_version = "1.0.0"
   config.vm.hostname = "rocky"
-  config.vm.synced_folder ".", "/vagrant",
+  config.vm.synced_folder ".", "/vagrant"
   config.vm.box_check_update = false
   config.vm.network "private_network", ip: "192.168.85.123"
   config.vm.provider "vmware_fusion" do |vb|
