@@ -1,0 +1,11 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "the-jaxon/nixos"
+  config.vm.box_version = "24.11"
+  config.vm.hostname = "nixos"
+  config.vm.synced_folder ".", "/vagrant"
+  config.vm.network "private_network", ip: "192.168.85.120"
+  config.vm.provider "vmware_fusion" do |vb|
+    vb.memory = 2048
+    vb.cpus = 2
+  end
+end
