@@ -2,28 +2,6 @@
 
 ![Vagrant](https://img.shields.io/badge/-Vagrant-1563FF?style=for-the-badge&logo=Vagrant&logoColor=white)
 
-Contains Vagrantfiles and the related config files used to setup the machines 
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Prerequisites](#prerequisites)
-- [Basics](#basics)
-  - [Vagrant Boxes](#vagrant-boxes)
-  - [Synced Folders](#synced-folders)
-  - [Basic commands](#basic-commands)
-- [Networking](#networking)
-  - [Private Networking](#private-networking)
-  - [Port Forwarding](#port-forwarding)
-- [Provisioners](#provisioners)
-  - [Shell Provisioner](#shell-provisioner)
-  - [Ansible_Local Provisioner](#ansible_local-provisioner)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
----
-
 ### Prerequisites
 - Start by downloading [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (This will be used as [our provider](https://developer.hashicorp.com/vagrant/docs/providers))
 - After that Install [Vagrant software](https://developer.hashicorp.com/vagrant/downloads)
